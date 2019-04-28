@@ -6,7 +6,7 @@ blis==0.2.4
 certifi==2019.3.9
 chardet==3.0.4
 cymem==2.0.2
-en-vectors-web-lg==2.1.0
+
 gast==0.2.2
 grpcio==1.19.0
 h5py==2.9.0

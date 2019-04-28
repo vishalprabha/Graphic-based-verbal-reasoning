@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html class=''>
+    <head>
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" id="bootstrap-css">
+        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+        <link rel="stylesheet" type="text/css" href="../static/main.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        
+    </head>
+
+    <body>
+        <div id="frame">
+            <div id="sidepanel">
+                <div id="profile">
+                    <div class="wrap">
+                        <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+                        <p>VQA Asst</p>
+                    </div>
+                </div>
+
+                <div id="contacts">
+                    <ul>
+                        <li class="contact active">
+                            <div class="wrap">
+                                <span class="contact-status busy"></span>
+                                <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                                <div class="meta">
+                                    <p class="name">Harvey Specter</p>
+                                    <p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="contact">
+                            <div class="wrap">
+                                <span class="contact-status away"></span>
+                                <img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
+                                <div class="meta">
+                                    <p class="name">About Us</p>
+                                    <p class="preview"></p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <div class="contact-profile">
+                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                    <p>Harvey Specter</p>
+                    <div class="social-media">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="messages">
+                    <ul>
+                        <li class="sent">
+                            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                            <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
+                        </li>
+                        <li class="replies">
+                            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                            <p>When you're backed against the wall, break the god damn thing down.</p>
+                        </li>
+                        <li class="replies">
+                            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                            <p>Excuses don't win championships.</p>
+                        </li>
+                        <li class="sent">
+                            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                            <p>Oh yeah, did Michael Jordan tell you that?</p>
+                        </li>
+                        <li class="replies">
+                            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                            <p>No, I told him that.</p>
+                        </li>
+                        <li class="replies">
+                            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                            <p>What are your choices when someone puts a gun to your head?</p>
+                        </li>
+                        <li class="sent">
+                            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                            <p>What are you talking about? You do what they say or they shoot you.</p>
+                        </li>
+                        <li class="replies">
+                            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                            <p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="message-input">
+                    <div class="wrap">
+                    <input type="text" placeholder="Write your message..." />
+                    <label class="fa fa-paperclip attachment" aria-hidden="true"><input id="image-upload" style="display: none;" type="file" accept="image/*"/></label> 
+                    <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script >$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
+$("#profile-img").click(function() {
+	$("#status-options").toggleClass("active");
+});
+
+$(".expand-button").click(function() {
+  $("#profile").toggleClass("expanded");
+	$("#contacts").toggleClass("expanded");
+});
+
+$("#status-options ul li").click(function() {
+	$("#profile-img").removeClass();
+	$("#status-online").removeClass("active");
+	$("#status-away").removeClass("active");
+	$("#status-busy").removeClass("active");
+	$("#status-offline").removeClass("active");
+	$(this).addClass("active");
+	
+	if($("#status-online").hasClass("active")) {
+		$("#profile-img").addClass("online");
+	} else if ($("#status-away").hasClass("active")) {
+		$("#profile-img").addClass("away");
+	} else if ($("#status-busy").hasClass("active")) {
+		$("#profile-img").addClass("busy");
+	} else if ($("#status-offline").hasClass("active")) {
+		$("#profile-img").addClass("offline");
+	} else {
+		$("#profile-img").removeClass();
+	};
+	
+	$("#status-options").removeClass("active");
+});
+
+function newMessage() {
+	message = $(".message-input input").val();
+	if($.trim(message) == '') {
+		return false;
+	}
+	$('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+	$('.message-input input').val(null);
+	$('.contact.active .preview').html('<span>You: </span>' + message);
+	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+};
+
+$('.submit').click(function() {
+  newMessage();
+});
+
+$(window).on('keydown', function(e) {
+  if (e.which == 13) {
+    newMessage();
+    return false;
+  }
+});
+//# sourceURL=pen.js
+
+$('#image-upload').bind('change', function() { 
+	var fileName = ''; 
+    fileName = $(this).val(); 
+    console.log(fileName + " is selected");
+    $.getJSON('/upload?file='+fileName).done(
+        function(data) {
+            console.log("Data: ", data);
+        });
+})
+</script>
+</body></html>
