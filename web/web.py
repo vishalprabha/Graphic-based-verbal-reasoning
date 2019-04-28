@@ -1,8 +1,10 @@
 from flask import Flask, request, render_template
+
+import os
 app = Flask(__name__)
 
 '''Constants (should be moved to another file) '''
-IMAGE_PATH = '\\test_images\\'
+IMAGE_PATH = '..\\static\\test_images\\'
 
 ''' Index page route '''
 @app.route('/', methods=["GET","POST"])
@@ -13,7 +15,7 @@ def index():
 def upload_file():
     if request.method == 'GET':
         print("Hi upload POST call", request.args)
-        file_path = IMAGE_PATH + str(request.args['file'])
+        file_path = IMAGE_PATH + os.path.basename(request.args['file'])
         return file_path
     else:
         return '404'
