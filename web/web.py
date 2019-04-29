@@ -20,6 +20,11 @@ def upload_file():
     else:
         return '404'
 
+@app.route('/converstion', methods= ['GET', 'POST'])
+def converstion():
+    if request.method == 'GET':
+        return
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
