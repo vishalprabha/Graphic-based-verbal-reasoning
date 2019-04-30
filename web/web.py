@@ -1,15 +1,18 @@
 from flask import Flask, request, render_template
-from tinydb import TinyDB, Query
+from tinydb import TinyDB, Query, where
 from tinydb.operations import set
 
 import os
+import subprocess
 app = Flask(__name__)
 
 ''' Constants (should be moved to another file) '''
-IMAGE_PATH = '..\\static\\test_images\\'
+IMAGE_URL = '..\\static\\test_images\\'
+IMAGE_PATH = 'web\\static\\test_images\\'
 
 ''' DB COnfiguration ''' 
 db = TinyDB('db/db.json')
+db_query = Query()
 
 ''' DB INIT '''
     # db.insert({"image_url": "", "conversation": [{"type": "sent", "message": "Hi how are you ?"}]})
@@ -25,17 +28,39 @@ def index():
 def upload_file():
     if request.method == 'GET':
         print("Hi upload POST call", request.args)
-        file_path = IMAGE_PATH + os.path.basename(request.args['file'])
-        db_query = Query()
-        db.update(set("img_url", file_path), db_query.chat_id == 1)
-        return file_path
+
+        file_name = os.path.basename(request.args['file'])
+        file_url = IMAGE_URL + file_name
+        file_path = IMAGE_PATH + file_name
+        
+        db.update(set("img_url", file_url), db_query.chat_id == 1)
+        db.update(set("img_path", file_path), db_query.chat_id == 1 )
+        return file_url
     else:
         return '404'
 
-@app.route('/converstion', methods= ['GET', 'POST'])
+@app.route('/convo', methods= ['GET', 'POST'])
 def converstion():
     if request.method == 'GET':
-        return
+        question = request.args['msg']
+        print("MESSAGE : " + question)
+
+        # subprocess call to vqa by mmoving out to root
+        # print("current working dir prev " + os.getcwd())
+        web_dir = os.getcwd()
+        os.chdir("..\\")
+        # print("current working dir after " + os.getcwd())
+
+        img_path = db.search(db_query.chat_id == 1)[0]['img_path']
+        print(img_path)
+
+        std_out = open("web\\output.txt", "w")
+        # std_out.write(question)
+        s = subprocess.Popen(['python', 'demo.py', '-image_file_name', img_path, '-question', question], stdout = std_out)
+        os.chdir(web_dir)
+
+
+        return 'Recieved MSG : ' + request.args['msg']
 
 if __name__ == '__main__':
     app.debug = True

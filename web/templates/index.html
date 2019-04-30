@@ -81,8 +81,8 @@
 
 $(".messages").animate({ scrollTop: $(document).height() }, "fast");
 
-function newMessage() {
-	message = $(".message-input input").val();
+function newMessage(message) {
+	
 	if($.trim(message) == '') {
 		return false;
 	}
@@ -93,12 +93,24 @@ function newMessage() {
 };
 
 $('.submit').click(function() {
-  newMessage();
+  message = $(".message-input input").val();  
+  newMessage(message);
+  if($.trim(message) == '') {
+		return false;
+  }  
+  $.get('/convo?msg='+message).done(
+        function(data) {
+            alert(data);
+            console.log("Data: ", data);
+            
+        }
+    );
+  
 });
 
 $(window).on('keydown', function(e) {
   if (e.which == 13) {
-    newMessage();
+    $('.submit').trigger('click');
     return false;
   }
 });

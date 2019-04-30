@@ -1,1 +1,1 @@
-{"_default": {"1": {"chat_id": 1, "img_url": "..\\static\\test_images\\test.jpg", "conversation": [{"type": "sent", "message": "Hi how are you ?"}]}}}
+{"_default": {"1": {"chat_id": 1, "img_url": "..\\static\\test_images\\test.jpg", "conversation": [{"type": "sent", "message": "Hi how are you ?"}, {"type": "replies", "message": "Iam fine "}], "img_path": "web\\static\\test_images\\test.jpg"}}}
