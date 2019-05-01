@@ -17,8 +17,8 @@
             <div id="sidepanel">
                 <div id="profile">
                     <div class="wrap">
-                        <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
-                        <p>VQA Asst</p>
+                        <img id="profile-img" src="../static/user.png" class="online" alt="" />
+                        <p>You</p>
                     </div>
                 </div>
 
@@ -27,10 +27,10 @@
                         <li class="contact active">
                             <div class="wrap">
                                 <span class="contact-status busy"></span>
-                                <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                                <img src="../static/logo.jpg" alt="" />
                                 <div class="meta">
-                                    <p class="name">Harvey Specter</p>
-                                    <p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+                                    <p class="name">VQA Asst</p>
+                                    <p class="preview"></p>
                                 </div>
                             </div>
                         </li>
@@ -43,8 +43,8 @@
             </div>
             <div class="content">
                 <div class="contact-profile">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p>Harvey Specter</p>
+                    <img src="../static/logo.jpg" alt="" />
+                    <p>VQA Asst</p>
                     <div class="social-media">
                         <i class="fa fa-github fa-lg" aria-hidden="true"></i>
                     </div>
@@ -55,15 +55,10 @@
                         
                         {% for chats in data.init_convo %}
                             <li class={{chats.type}}>
-                                <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                                <img src="{{chats.src}}" alt="" />
                                 <p>{{chats.message}}     </p>
                             </li>
                         {% endfor %}
-            
-                        <li class="replies">
-                            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                            <p>When you're backed against the wall, break the god damn thing down.</p>
-                        </li>
                         
                     </ul>
                 </div>
@@ -86,7 +81,7 @@ function newMessage(message) {
 	if($.trim(message) == '') {
 		return false;
 	}
-	$('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+	$('<li class="sent"><img src="../static/user.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
 	$('.message-input input').val(null);
 	$('.contact.active .preview').html('<span>You: </span>' + message);
 	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
@@ -103,7 +98,7 @@ function newMessageReply(resultArr) {
         message = message + result[1] + "</b> confidence : <b>" + result[0] + "</b><br/>";
         console.log(message)
     }
-    $('<li class="replies"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+    $('<li class="replies"><img src="../static/logo.jpg" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
     $('.message-input input').val(null);
     $('.contact.active .preview').html(message);
     $(".messages").animate({ scrollTop: $(document).height() }, "fast");
@@ -114,7 +109,8 @@ $('.submit').click(function() {
   newMessage(message);
   if($.trim(message) == '') {
 		return false;
-  }  
+  } 
+  newMessageIntro("Iam on it, Thinking ...")
   $.get('/convo?msg='+message).done(
         function(data) {
             alert(data);
@@ -128,10 +124,20 @@ $('.submit').click(function() {
             console.log(resultArr[0]);  
             newMessageReply(resultArr);
             console.log(resultArr);   
+            newMessageIntro("I think iam getting good at this<br/>Ask me more !")
         }
     );
   
 });
+
+function newMessageIntro(message) {
+
+    $('<li class="replies"><img src="../static/logo.jpg" alt="" /><p>'+ message + '</p></li>').appendTo($('.messages ul'));
+    $('.message-input input').val(null);
+    $('.contact.active .preview').html(message);
+    $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+    
+}
 
 $(window).on('keydown', function(e) {
   if (e.which == 13) {
@@ -145,6 +151,7 @@ $('#image-upload').bind('change', function() {
 	var fileName = ''; 
     fileName = $(this).val(); 
     console.log(fileName + " is selected");
+    newMessageIntro("New Image is loaded, I like the image..<br/>U have nice taste !!")
     $.get('/upload?file='+fileName).done(
         function(data) {
             //alert(data);

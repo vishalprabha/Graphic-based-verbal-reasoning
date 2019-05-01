@@ -1,8 +1,6 @@
-77.82 %  sunny
-09.83 %  cloudy
-03.44 %  overcast
-01.79 %  rainy
-00.97 %  clear
-.97 %  clear
-=======
->>>>>>> 3e88a2f4e6bf6eebb87f97dd7da30d0ae98154c3
+62.29 %  no
+37.71 %  yes
+000.0 %  air
+000.0 %  in air
+000.0 %  ground
+
