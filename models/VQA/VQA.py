@@ -1,4 +1,3 @@
-# modification of model from https://github.com/avisingh599/visual-qa
 import warnings 
 from keras.models import Sequential
 from keras.layers.core import Reshape, Activation, Dropout
@@ -40,9 +39,3 @@ def VQA_MODEL():
     warnings.filterwarnings("ignore", category=UserWarning)
 
     return model
-
-
-
-
-
-
