@@ -61,6 +61,7 @@ to get the question features. `--num_ans` specifiy how many top answers you want
 
 ```
 $ th prepro_img.lua -input_json data_prepro.json -image_root path_to_image_root -cnn_proto path_to_cnn_prototxt -cnn_model path to cnn_model
+```
 
 Place the following three generated files in the data directory --
 
