@@ -1,6 +1,6 @@
-62.29 %  no
-37.71 %  yes
-000.0 %  air
-000.0 %  in air
-000.0 %  ground
-
+61.73 %  yes
+38.27 %  no
+000.0 %  safety
+000.0 %  rail
+000.0 %  sun
+ue and white

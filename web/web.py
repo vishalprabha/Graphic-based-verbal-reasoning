@@ -3,11 +3,16 @@ from tinydb import TinyDB, Query, where
 from tinydb.operations import set
 import os
 import subprocess
+import pyttsx3
+import re
 app = Flask(__name__)
 
 ''' Constants (should be moved to another file) '''
 IMAGE_URL = '..\\static\\test_images\\'
 IMAGE_PATH = 'web\\static\\test_images\\'
+
+''' Text to speech Init '''
+
 
 ''' DB COnfiguration '''
 db = TinyDB('db/db.json')
@@ -37,6 +42,27 @@ def upload_file():
         return file_url
     else:
         return '404'
+
+@app.route('/tts', methods= ['GET', "POST"])
+def tts():
+    if request.method == 'GET':
+        message = request.args['message']
+        print("TTS : " + message)
+        message = re.sub(r'<br/>', "", message)
+        # message.replace("<br/>", "")
+        print("TTS : " + message)
+        engine = pyttsx3.init()
+        voices = engine.getProperty('voices')
+        rate = engine.getProperty('rate')
+        engine.setProperty('rate', rate-50) #set rate
+        volume = engine.getProperty('volume')
+        engine.setProperty('volume', volume+0.50) #set volume
+        voices = engine.getProperty('voices')
+        engine.setProperty('voice', 'english+f4') #voice id 0
+        engine.say(message)
+        engine.runAndWait()
+        return ''
+
 
 @app.route('/convo', methods= ['GET', 'POST'])
 def converstion():

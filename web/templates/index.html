@@ -85,23 +85,27 @@ function newMessage(message) {
 	$('.message-input input').val(null);
 	$('.contact.active .preview').html('<span>You: </span>' + message);
 	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
+    //$.get('/tts?message='+message);
 };
 
 function newMessageReply(resultArr) {
-	var intro_msg = "I think its, <b>";
-    var other_msg = "<br/><br/>but it can also be <br/><b>";
-    var message = intro_msg + resultArr[0][1] + '</b> with confidence of <b>' + resultArr[0][0] + '%</b> ' + other_msg;
+	var intro_msg = "I think its, ";
+    var other_msg = "<br/><br/>but it can also be :<br/>";
+    var message = intro_msg + resultArr[0][1] + ' with confidence of ' + resultArr[0][0] + '% ' + other_msg;
     console.log(message);
     resultArr.shift();
     for (result of resultArr) {
         console.log(result)
-        message = message + result[1] + "</b> confidence : <b>" + result[0] + "</b><br/>";
+        message = message + result[1] + " confidence of " + result[0] + ",<br/>";
         console.log(message)
     }
     $('<li class="replies"><img src="../static/logo.jpg" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
     $('.message-input input').val(null);
     $('.contact.active .preview').html(message);
     $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
+    $.get('/tts?message='+message);
 };
 
 $('.submit').click(function() {
@@ -113,7 +117,7 @@ $('.submit').click(function() {
   newMessageIntro("Iam on it, Thinking ...")
   $.get('/convo?msg='+message).done(
         function(data) {
-            //alert(data);
+            // alert(data);
             var arraySort = [];
             console.log("Data: ", data);
 
@@ -136,6 +140,7 @@ function newMessageIntro(message) {
     $('.message-input input').val(null);
     $('.contact.active .preview').html(message);
     $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+    $.get('/tts?message='+message);
     
 }
 
@@ -151,7 +156,7 @@ $('#image-upload').bind('change', function() {
 	var fileName = ''; 
     fileName = $(this).val(); 
     console.log(fileName + " is selected");
-    newMessageIntro("New Image is loaded, I like the image..<br/>U have nice taste !!")
+    newMessageIntro("New Image is loaded, I like the image..<br/> U have nice taste !!")
     $.get('/upload?file='+fileName).done(
         function(data) {
             //alert(data);
