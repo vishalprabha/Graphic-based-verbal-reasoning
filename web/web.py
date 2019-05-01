@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from tinydb import TinyDB, Query, where
 from tinydb.operations import set
 
@@ -54,13 +54,30 @@ def converstion():
         img_path = db.search(db_query.chat_id == 1)[0]['img_path']
         print(img_path)
 
-        std_out = open("web\\output.txt", "w")
+        std_out = open("web\\output.txt", "r+")
         # std_out.write(question)
         s = subprocess.Popen(['python', 'demo.py', '-image_file_name', img_path, '-question', question], stdout = std_out)
+        s.wait()
         os.chdir(web_dir)
 
+        # parse the output to dict
+        result_dict = parse_output()
+        db.update(set("q_a", [{"question": question, "result": result_dict}]), db_query.chat_id == 1)
 
-        return 'Recieved MSG : ' + request.args['msg']
+        return jsonify(result_dict)
+
+def parse_output() :
+    print("INSIDE PARSER : "+ os.getcwd())
+    std_out = open("output.txt", "r+")
+    result_dict = {}
+    for line in std_out :
+        if "%" in line :
+            print(line.split(" %  "))
+            value, key = line.split(" %  ")
+            result_dict[key[:-1]] = value
+    return(result_dict)
+            
+
 
 if __name__ == '__main__':
     app.debug = True

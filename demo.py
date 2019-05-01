@@ -95,7 +95,7 @@ def main():
     args = parser.parse_args()
 
     
-    if verbose : print("\n\n\nLoading image features ...")
+    if verbose : print("Loading image features ...")
     image_features = get_image_features(args.image_file_name, CNN_weights_file_name)
 
     if verbose : print("Loading question features ...")
@@ -106,7 +106,7 @@ def main():
     
 
 	
-    if verbose : print("\nPredicting result ...") 
+    if verbose : print("Predicting result ...") 
     y_output = vqa_model.predict([question_features, image_features])
     warnings.filterwarnings("ignore", category=DeprecationWarning)
     warnings.filterwarnings("ignore", category=UserWarning)
