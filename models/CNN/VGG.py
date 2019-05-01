@@ -1,6 +1,3 @@
-# Modificaiton of file obtained from here
-# https://gist.github.com/baraldilorenzo/07d7802847aaad0a35d3
-
 from keras.models import Sequential
 from keras.layers.core import Flatten, Dense, Dropout
 from keras.layers.convolutional import MaxPooling2D, ZeroPadding2D
@@ -9,9 +6,7 @@ import numpy as np
 
 
 def pop(model):
-    '''Removes a layer instance on top of the layer stack.
-    This code is thanks to @joelthchao https://github.com/fchollet/keras/issues/2371#issuecomment-211734276
-    '''
+    
     if not model.outputs:
         raise Exception('Sequential model cannot be popped: model is empty.')
     else:
@@ -41,7 +36,7 @@ def load_model_legacy(model, weight_path):
         g = f['layer_{}'.format(k)]
         weights = [g['param_{}'.format(p)] for p in range(g.attrs['nb_params'])]
         if not weights: continue
-        if len(weights[0].shape) >2: 
+        if len(weights[0].shape) >2:
             # swap conv axes
             # note np.rollaxis does not work with HDF5 Dataset array
             weights[0] = np.swapaxes(weights[0],0,3)
@@ -95,7 +90,7 @@ def VGG_16(weights_path=None):
     model.add(Dense(4096, activation='relu'))
     model.add(Dropout(0.5))
     model.add(Dense(1000, activation='softmax'))
-    
+
     if weights_path:
         # model.load_weights(weights_path)
         load_model_legacy(model, weights_path)
@@ -103,7 +98,6 @@ def VGG_16(weights_path=None):
     #Remove the last two layers to get the 4096D activations
     model = pop(model)
     model = pop(model)
-        
+
 
     return model
-
