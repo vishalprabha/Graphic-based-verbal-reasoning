@@ -1,9 +1,5 @@
-Loading image features ...
-Loading question features ...
-Loading VQA Model ...
-Predicting result ...
-58.08 %  yes
-41.92 %  no
-000.0 %  safety
-000.0 %  rail
-000.0 %  sunset
+77.82 %  sunny
+09.83 %  cloudy
+03.44 %  overcast
+01.79 %  rainy
+00.97 %  clear
