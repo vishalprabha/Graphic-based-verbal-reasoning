@@ -92,6 +92,23 @@ function newMessage(message) {
 	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
 };
 
+function newMessageReply(resultArr) {
+	var intro_msg = "I think its, <b>";
+    var other_msg = "<br/><br/>but it can also be <br/><b>";
+    var message = intro_msg + resultArr[0][1] + '</b> with confidence of <b>' + resultArr[0][0] + '%</b> ' + other_msg;
+    console.log(message);
+    resultArr.shift();
+    for (result of resultArr) {
+        console.log(result)
+        message = message + result[1] + "</b> confidence : <b>" + result[0] + "</b><br/>";
+        console.log(message)
+    }
+    $('<li class="replies"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+    $('.message-input input').val(null);
+    $('.contact.active .preview').html(message);
+    $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+};
+
 $('.submit').click(function() {
   message = $(".message-input input").val();  
   newMessage(message);
@@ -107,7 +124,10 @@ $('.submit').click(function() {
             for( var i in data) {
                 arraySort.push([data[i], i])
             }
-            console.log(arraySort.sort().reverse())
+            resultArr = arraySort.sort().reverse();
+            console.log(resultArr[0]);  
+            newMessageReply(resultArr);
+            console.log(resultArr);   
         }
     );
   
