@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template, jsonify
 from tinydb import TinyDB, Query, where
 from tinydb.operations import set
-
 import os
 import subprocess
 app = Flask(__name__)
@@ -10,7 +9,7 @@ app = Flask(__name__)
 IMAGE_URL = '..\\static\\test_images\\'
 IMAGE_PATH = 'web\\static\\test_images\\'
 
-''' DB COnfiguration ''' 
+''' DB COnfiguration '''
 db = TinyDB('db/db.json')
 db_query = Query()
 
@@ -32,7 +31,7 @@ def upload_file():
         file_name = os.path.basename(request.args['file'])
         file_url = IMAGE_URL + file_name
         file_path = IMAGE_PATH + file_name
-        
+
         db.update(set("img_url", file_url), db_query.chat_id == 1)
         db.update(set("img_path", file_path), db_query.chat_id == 1 )
         return file_url
@@ -76,7 +75,7 @@ def parse_output() :
             value, key = line.split(" %  ")
             result_dict[key[:-1]] = value
     return(result_dict)
-            
+
 
 
 if __name__ == '__main__':
