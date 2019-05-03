@@ -6,7 +6,9 @@
         <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
         <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
         <link rel="stylesheet" type="text/css" href="../static/main.css">
-
+        
+        <link rel="shortcut icon" type="image/png" href="../static/logo.jpg"/>
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         
@@ -97,7 +99,7 @@ function newMessageReply(resultArr) {
     resultArr.shift();
     for (result of resultArr) {
         console.log(result)
-        message = message + result[1] + " confidence of " + result[0] + ",<br/>";
+        message = message + result[1] + " confidence of " + result[0] + "%,<br/>";
         console.log(message)
     }
     $('<li class="replies"><img src="../static/logo.jpg" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
