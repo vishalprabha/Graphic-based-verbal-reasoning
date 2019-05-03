@@ -2,7 +2,7 @@
 
 ## Block Diagram
 
-<img src='https://raw.githubusercontent.com/vishalprabha/Graphic-based-verbal-reasoning/master/model_vqa.png'>
+<img src='https://github.com/vishalprabha/Graphic-based-verbal-reasoning/blob/master/model_vqa.png?raw=true'>
 
 ## Model JSON
 

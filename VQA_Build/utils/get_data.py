@@ -1,10 +1,3 @@
-'''
-Original: https://github.com/JamesChuanggg/vqa-tf/blob/master/model_VQA.py
-Modified: Added Val answers to the return of get_data_test
-Aaditya Prakash
-
-'''
-
 from __future__ import print_function
 import numpy as np
 import h5py  as hf
@@ -100,7 +93,6 @@ def get_data_test(args):
         img_feature = np.divide(img_feature, np.tile(tem,(1,args.img_vec_dim)))
 
 
-    # Added by Adi, make sure the ans_file is provided
     nb_data_test = len(test_data[u'question'])
     val_all_answers_dict = json.load(open(args.ans_file))
     val_answers = np.zeros(nb_data_test, dtype=np.int32)
@@ -109,7 +101,7 @@ def get_data_test(args):
     count_of_not_found = 0
     for i in xrange(nb_data_test):
         qid = test_data[u'ques_id'][i]
-        try : 
+        try :
             val_ans_ix =int(ans_to_ix[most_common(val_all_answers_dict[str(qid)])]) -1
         except KeyError:
             count_of_not_found += 1

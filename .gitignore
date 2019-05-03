@@ -8,3 +8,4 @@ __pycache__
 VQA_Build/data/data_img.h5
 VQA_Build/data/data_prepro.h5
 VQA_Build/data/data_prepro.json
+.ipynb_checkpoints

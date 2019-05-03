@@ -1,5 +1,3 @@
-''' Author: Aaditya Prakash '''
-
 import argparse
 
 def get_arguments():
