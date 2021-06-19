@@ -1,11 +1,14 @@
-models/CNN/vgg16_weights.h5
+# Mac files 
 .DS_Store
 .DS_Store?
-._*
-__init__.py
-__pycache__
-*.pyc
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Project files
 VQA_Build/data/data_img.h5
 VQA_Build/data/data_prepro.h5
 VQA_Build/data/data_prepro.json
-.ipynb_checkpoints
+
+# Environment
+gbvr/*
