@@ -20,7 +20,7 @@ mock==2.0.0
 msgpack==0.6.1
 msgpack-numpy==0.4.4.2
 murmurhash==0.28.0
-numpy==1.19.2
+numpy==1.22.0
 opencv-python==4.5.2.54
 pbr==5.1.3
 plac==0.9.6
